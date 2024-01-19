@@ -13,3 +13,5 @@ python-json-logger==2.0.7
 ddtrace==2.4.0
 sentence-transformers==2.2.2
 voyageai==0.1.6
+fastapi==0.109.0
+httpx==0.26.0

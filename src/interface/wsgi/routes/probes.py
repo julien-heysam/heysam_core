@@ -38,9 +38,3 @@ async def probe_readiness(request: Request):
     except Exception as e:
         logger.warning(f"startup incomplete {e}")
         return status.HTTP_503_SERVICE_UNAVAILABLE
-
-
-@probe_route.get("/liveness")
-async def probe_liveness():
-    """Used for liveness probe"""
-    return status.HTTP_200_OK

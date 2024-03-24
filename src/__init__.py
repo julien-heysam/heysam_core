@@ -14,11 +14,7 @@ load_dotenv(override=True)
 class RichCustomFormatter(logging.Formatter):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.rich_handler = RichHandler(
-            rich_tracebacks=True, 
-            tracebacks_suppress=[], 
-            tracebacks_show_locals=True
-        )
+        self.rich_handler = RichHandler(rich_tracebacks=True, tracebacks_suppress=[], tracebacks_show_locals=True)
 
     def format(self, record):
         return super().format(record)
@@ -35,7 +31,7 @@ class ProjectApiKeys(BaseSettings):
     PROMPTLAYER_API_KEY: str = os.environ.get("PROMPTLAYER_API_KEY", "")
     VOYAGE_API_KEY: str = os.environ.get("VOYAGE_API_KEY", "")
     COHERE_API_KEY: str = os.environ.get("COHERE_API_KEY", "")
-    
+
     OPENAI_API_KEY: str = os.environ.get("OPENAI_API_KEY", "")
     OPENAI_ORGANIZATION: str = os.environ.get("OPENAI_ORGANIZATION", "")
 
@@ -70,14 +66,14 @@ LOGGING_CONFIG = {
         "console": {
             "()": RichCustomFormatter,
             "format": "%(asctime)s | %(message)s",
-            "datefmt": "<%d %b %Y | %H:%M:%S>"
+            "datefmt": "<%d %b %Y | %H:%M:%S>",
         },
         "json_datadog": {
             "()": JsonFormatter,
             "format": "%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] "
-                    "[dd.service=%(dd.service)s dd.env=%(dd.env)s dd.version=%(dd.version)s "
-                    "dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] - %(message)s",
-            "datefmt": "<%d %b %Y | %H:%M:%S>"
+            "[dd.service=%(dd.service)s dd.env=%(dd.env)s dd.version=%(dd.version)s "
+            "dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] - %(message)s",
+            "datefmt": "<%d %b %Y | %H:%M:%S>",
         },
     },
     "handlers": {
@@ -95,19 +91,19 @@ LOGGING_CONFIG = {
     },
     "loggers": {
         "": {
-            "handlers": ["datadog"] if PROJECT_ENV.ENV == "PROD" else ["console"], 
-            "level": "INFO" if PROJECT_ENV.ENV == "PROD" else "INFO", 
-            "propagate": True
+            "handlers": ["datadog"] if PROJECT_ENV.ENV == "PROD" else ["console"],
+            "level": "INFO" if PROJECT_ENV.ENV == "PROD" else "INFO",
+            "propagate": True,
         },
         "sentence_transformers": {
-            "handlers": ["datadog"] if PROJECT_ENV.ENV == "PROD" else ["console"], 
-            "level": "INFO" if PROJECT_ENV.ENV == "PROD" else "INFO", 
-            "propagate": False
+            "handlers": ["datadog"] if PROJECT_ENV.ENV == "PROD" else ["console"],
+            "level": "INFO" if PROJECT_ENV.ENV == "PROD" else "INFO",
+            "propagate": False,
         },
         "uvicorn": {
-            "handlers": ["datadog"] if PROJECT_ENV.ENV == "PROD" else ["console"], 
-            "level": "INFO" if PROJECT_ENV.ENV == "PROD" else "INFO", 
-            "propagate": False
+            "handlers": ["datadog"] if PROJECT_ENV.ENV == "PROD" else ["console"],
+            "level": "INFO" if PROJECT_ENV.ENV == "PROD" else "INFO",
+            "propagate": False,
         },
     },
 }

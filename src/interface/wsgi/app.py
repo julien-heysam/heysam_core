@@ -14,21 +14,7 @@ async def lifespan(app: FastAPI):
 
 
 def build_app() -> FastAPI:
-    app = FastAPI(
-        title="",
-        description="",
-        summary="",
-        version="0.0.1",
-        contact={
-            "name": "",
-            "url": "",
-        },
-        license_info={
-            "name": "Apache 2.0",
-            "identifier": "MIT",
-        },
-        lifespan=lifespan,
-    )
+    app = FastAPI(lifespan=lifespan)
     app.include_router(probe_route)
 
     return app
